@@ -2,7 +2,7 @@ class VideofilesController < ApplicationController
   # GET /videofiles
   # GET /videofiles.xml
   def index
-    @videofiles = Videofile.paginate :page => params[:page], :order => 'created_at DESC'
+    @videofiles = Videofile.paginate :page => params[:page]
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @videofiles }

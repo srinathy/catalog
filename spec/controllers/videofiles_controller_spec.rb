@@ -10,7 +10,7 @@ describe VideofilesController do
 
   describe "GET index" do
     it "assigns all videofiles as @videofiles" do
-      Videofile.stub(:all) { [mock_videofile] }
+      Videofile.stub(:paginate) { [mock_videofile] }
       get :index
       assigns(:videofiles).should eq([mock_videofile])
     end
