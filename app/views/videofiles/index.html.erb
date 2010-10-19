@@ -1,9 +1,8 @@
 <h1>Listing videofiles</h1>
 
-<table>
+<table class="info">
   <tr>
     <th>Title</th>
-    <th>Body</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,8 +10,7 @@
 
 <% @videofiles.each do |videofile| %>
   <tr>
-    <td><%= videofile.title %></td>
-    <td><%= videofile.body %></td>
+    <td class="title"><%= videofile.title %></td>
     <td><%= link_to 'Show', videofile %></td>
     <td><%= link_to 'Edit', edit_videofile_path(videofile) %></td>
     <td><%= link_to 'Destroy', videofile, :confirm => 'Are you sure?', :method => :delete %></td>

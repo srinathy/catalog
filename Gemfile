@@ -18,4 +18,5 @@ group :development, :test do
 	gem 'rspec-rails'
 	gem 'autotest'
   gem 'shoulda'
+	gem 'webrat'
 end

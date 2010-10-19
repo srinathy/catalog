@@ -2,7 +2,6 @@ require "spec_helper"
 
 describe VideofilesController do
   describe "routing" do
-
     it "recognizes and generates #index" do
       { :get => "/videofiles" }.should route_to(:controller => "videofiles", :action => "index")
     end
@@ -30,6 +29,9 @@ describe VideofilesController do
     it "recognizes and generates #destroy" do
       { :delete => "/videofiles/1" }.should route_to(:controller => "videofiles", :action => "destroy", :id => "1")
     end
-
+    
+    it "routes main page to #index" do
+      { :get => ""}.should route_to(:controller => "videofiles", :action => "index")
+    end
   end
 end

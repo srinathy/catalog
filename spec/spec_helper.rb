@@ -8,6 +8,7 @@ require 'rspec/rails'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 Factory.find_definitions
+require 'shoulda'
 
 RSpec.configure do |config|
   # == Mock Framework
