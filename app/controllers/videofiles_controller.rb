@@ -1,4 +1,6 @@
 class VideofilesController < ApplicationController
+  uses_tiny_mce
+    
   # GET /videofiles
   # GET /videofiles.xml
   def index

@@ -7,6 +7,7 @@ gem 'will_paginate'
 group :development, :test do
 	gem 'ruby-debug'
 	
+  gem 'tiny_mce'
 	gem 'sanitize'
 
 	gem 'nifty-generators'
