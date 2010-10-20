@@ -8,7 +8,8 @@ require 'rspec/rails'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 Factory.find_definitions
-require 'shoulda'
+
+require "paperclip/matchers"
 
 RSpec.configure do |config|
   # == Mock Framework
@@ -27,4 +28,6 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+  
+  config.include Paperclip::Shoulda::Matchers
 end
