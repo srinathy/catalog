@@ -1,5 +1,5 @@
 class Videofile < ActiveRecord::Base
-  attr_accessible :title, :body
+  attr_accessible :title, :body, :poster
   
   cattr_reader :per_page
   @@per_page = 10  
@@ -9,7 +9,6 @@ class Videofile < ActiveRecord::Base
     write_attribute('body', Sanitize.clean(text, Sanitize::Config::RELAXED))
   end
 
-  #attr_accessible :poster
   has_attached_file :poster, :styles => { :mainpage => "200x200" }
   validates_attachment_presence :poster
   validates_attachment_size :poster, :less_than => 5.megabyte

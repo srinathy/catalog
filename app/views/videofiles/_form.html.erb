@@ -1,4 +1,4 @@
-<%= form_for(@videofile) do |f| %>
+<%= form_for(@videofile, :html => { :multipart => true }) do |f| %>
   <% if @videofile.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@videofile.errors.count, "error") %> prohibited this videofile from being saved:</h2>
@@ -19,6 +19,10 @@
     <%= f.label :body %><br />
     <%= f.text_area :body, :class => "mceEditor" %>
   </div>
+	<div class="field">
+		 <%= f.label :poster %><br />
+		 <%= f.file_field :poster %>
+	</div>
   <div class="actions">
     <%= f.submit %>
   </div>
