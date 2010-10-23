@@ -34,8 +34,6 @@ role :db,  domain, :primary => true
 
 #update bundle
 require 'bundler/capistrano'
- 
-after 'deploy:update_code', 'bundler:bundle_new_release'
 
 #config files
 after "deploy:symlink", :roles => :web do
