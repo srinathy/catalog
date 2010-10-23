@@ -2,7 +2,7 @@ class Videofile < ActiveRecord::Base
   attr_accessible :title, :body, :poster
   
   cattr_reader :per_page
-  @@per_page = 5
+  @@per_page = 12
   @@order = 'created_at DESC'
   
   def body=(text)

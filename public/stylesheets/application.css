@@ -19,7 +19,7 @@ a {
 }
 
 #container {
-  width: 75%;
+  width: 85%;
   margin: 0 auto;
   background-color: #FFF;
   padding: 20px 40px;
@@ -72,4 +72,18 @@ a {
 
 .error_messages ul {
   margin: 0;
+}
+
+.content-block {
+	width:250px;
+	height:250px;
+	overflow:hidden;
+	padding:10px;
+	vertical-align: middle;
+	text-align: center;
+	float: left;
+}
+
+.content-link {
+	font-weight: bold;
 }
