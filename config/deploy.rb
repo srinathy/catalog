@@ -32,6 +32,23 @@ role :db,  domain, :primary => true
 #	Tasks
 #############################################################
 
+#update bundle
+namespace :bundler do
+  task :create_symlink, :roles => :app do
+    shared_dir = File.join(shared_path, 'bundle')
+    release_dir = File.join(current_release, '.bundle')
+    run("mkdir -p #{shared_dir} && ln -s #{shared_dir} #{release_dir}")
+  end
+ 
+  task :bundle_new_release, :roles => :app do
+    bundler.create_symlink
+    run "cd #{release_path} && bundle install --without test"
+  end
+end
+ 
+after 'deploy:update_code', 'bundler:bundle_new_release'
+
+#config files
 after "deploy:symlink", :roles => :web do
   run <<-CMD
         ln -nfs #{shared_path}/database.yml #{current_path}/config/database.yml &&
@@ -39,6 +56,7 @@ after "deploy:symlink", :roles => :web do
       CMD
 end
 
+#restarting apache
 namespace :deploy do
   task :start do ; end
   task :stop do ; end
