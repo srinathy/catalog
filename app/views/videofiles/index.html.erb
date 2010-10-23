@@ -10,7 +10,7 @@
 	</p>
 	<p>
 		<%= link_to videofile, :class => "content-link" do %>	
-			<%= videofile.title %>
+			<%= videofile.title %> (<%= videofile.rating %> of <%= videofile.votes %>)
 		<% end %>
 	</p>
 	<p>

@@ -1,5 +1,5 @@
 class Videofile < ActiveRecord::Base
-  attr_accessible :title, :body, :poster
+  attr_accessible :title, :body, :poster, :rating
   
   cattr_reader :per_page
   @@per_page = 12

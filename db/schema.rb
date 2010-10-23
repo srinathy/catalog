@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101020165255) do
+ActiveRecord::Schema.define(:version => 20101023152246) do
 
   create_table "videofiles", :force => true do |t|
     t.string   "title"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(:version => 20101020165255) do
     t.string   "poster_content_type"
     t.integer  "poster_file_size"
     t.datetime "poster_updated_at"
+    t.integer  "rating",              :default => 0
+    t.integer  "votes",               :default => 0
   end
 
 end
