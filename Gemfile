@@ -9,6 +9,8 @@ gem 'sanitize'
 
 gem 'paperclip'
 
+gem 'capistrano'
+
 group :development, :test do
 	gem 'ruby-debug'
 

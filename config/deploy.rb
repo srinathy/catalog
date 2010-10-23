@@ -1,0 +1,48 @@
+load 'config/private';
+
+set :application, "catalog"
+
+#############################################################
+#	Git settings
+#############################################################
+
+set :repository,  "git://github.com/brain-geek/#{application}.git"
+set :scm, :git
+set :deploy_via, :remote_cache
+
+#############################################################
+#	Settings
+#############################################################
+
+ssh_options[:forward_agent] = true
+set :use_sudo, false
+set :rails_env, "production" 
+
+#############################################################
+#	Servers
+#############################################################
+
+set :app_dir, "/home/#{user}/apps/#{application}"
+set :deploy_to, "#{app_dir}/deploy"
+role :web, domain
+role :app, domain
+role :db,  domain, :primary => true
+
+#############################################################
+#	Tasks
+#############################################################
+
+after "deploy:symlink", :roles => :web do
+  run <<-CMD
+        ln -nfs #{shared_path}/database.yml #{current_path}/config/database.yml &&
+        ln -nfs #{shared_path}/app_config.yml #{current_path}/config/app_config.yml
+      CMD
+end
+
+namespace :deploy do
+  task :start do ; end
+  task :stop do ; end
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+  end
+end
