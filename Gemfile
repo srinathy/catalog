@@ -11,6 +11,10 @@ gem 'paperclip'
 
 gem 'capistrano'
 
+group :production do
+	gem 'mysql'
+end
+
 group :development, :test do
 	gem 'ruby-debug'
 
