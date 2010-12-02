@@ -13,4 +13,6 @@ class Videofile < ActiveRecord::Base
   validates_attachment_presence :poster
   validates_attachment_size :poster, :less_than => 5.megabyte
   validates_attachment_content_type :poster, :content_type => ['image/png', 'image/gif', 'image/jpeg']
+  
+  
 end
