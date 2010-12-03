@@ -9,7 +9,7 @@ class Videofile < ActiveRecord::Base
     write_attribute('body', Sanitize.clean(text, Sanitize::Config::RELAXED))
   end
 
-  has_attached_file :poster, :styles => { :mainpage => "200x200" }
+  has_attached_file :poster, :styles => { :mainpage => "200x200" }, :use_timestamp => false
   validates_attachment_presence :poster
   validates_attachment_size :poster, :less_than => 5.megabyte
   validates_attachment_content_type :poster, :content_type => ['image/png', 'image/gif', 'image/jpeg']

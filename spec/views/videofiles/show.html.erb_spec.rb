@@ -12,12 +12,12 @@ describe "videofiles/show.html.erb" do
       content.should have_selector("h2") do |h2|
         h2.inner_html.should == h(@videofile.title)
       end
-      content.should have_selector("p") do |content|
-        content.inner_html.should == @videofile.body
+      
+      content.should have_selector("p") do |body|
+        body.inner_html.should == @videofile.body
       end
-      content.should have_selector("img") do |img|
-        h2.src.should == @videofile.poster.url
-      end
+      
+      content.should have_selector("img", :src => @videofile.poster.url)
     end
   end
 end
