@@ -3,11 +3,11 @@ require 'spec_helper'
 describe "videofiles/show.html.erb" do
   before(:each) do
     @videofile = assign(:videofile, Factory.stub(:videofile))
-    
-    render
   end
 
-  it "renders attributes in <p>" do
+  it "renders main design" do
+    render
+    
     rendered.should have_selector "div.content" do |content|
       content.should have_selector("h2") do |h2|
         h2.inner_html.strip.should == h(@videofile.title.strip)
@@ -18,8 +18,21 @@ describe "videofiles/show.html.erb" do
       end
       
       content.should have_selector("img", :src => @videofile.poster.url)
-      
-      #content.should have_selector("a", :href => @videofile.processed.url)
     end
   end
+  
+  it "shows media player if file is present" do
+    @videofile = assign(:videofile, Factory.stub(:videofile_with_file))
+
+    render
+        
+    rendered.should have_selector("a", :href => @videofile.repacked.url)
+  end
+  
+  it "should not show media player if no file present" do
+    render
+        
+    rendered.should_not have_selector("a", :href => @videofile.repacked.url)
+  end
+  
 end

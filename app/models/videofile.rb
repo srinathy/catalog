@@ -10,12 +10,12 @@ class Videofile < ActiveRecord::Base
   validates_attachment_size :poster, :less_than => 5.megabyte
   validates_attachment_content_type :poster, :content_type => ['image/png', 'image/gif', 'image/jpeg']
   
-  has_attached_file :original
+  has_attached_file :original, :use_timestamp => false
   validates_attachment_presence :original
   validates_attachment_size :original, :less_than => 5.gigabyte
   validates_attachment_content_type :original, :content_type => ['video/avi', 'video/mkv', 'video/mp4']
   
-  has_attached_file :repacked
+  has_attached_file :repacked, :use_timestamp => false
   validates_attachment_content_type :repacked, :content_type => ['video/x-flv']
 
   def body=(text)
