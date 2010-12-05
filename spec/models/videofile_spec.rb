@@ -32,8 +32,22 @@ describe Videofile do
   #     rejecting('text/plain', 'text/xml')}
   
   it { should have_attached_file(:repacked) }
-  # it { should validate_attachment_content_type(:original).
+  # it { should validate_attachment_content_type(:repacked).
   #     allowing('video/flv').
   #     rejecting('text/plain', 'text/xml', 'video/mp4', 'image/mkv')}
+  
+  it "should be able to process file" do
+    file = Factory.build :videofile
+    file.original = File.new(Rails.root.join('spec', 'files', 'test0.avi'))
+    
+    file.process_video
+    
+    # doc - https://github.com/streamio/streamio-ffmpeg
+    movie = FFMPEG::Movie.new(file.repacked.path)
+    
+    movie.should be_valid
+    
+    movie.video_codec.should equal 'flv'
+  end
   
 end

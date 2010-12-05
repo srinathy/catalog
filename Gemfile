@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~>3.0.1'
+gem 'rails', '~>3.0'
 gem "will_paginate", "~> 3.0.pre2"
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
@@ -12,10 +12,11 @@ gem 'paperclip'
 
 gem 'capistrano'
 
+gem 'streamio-ffmpeg'
+
 group :production do
 	gem 'mysql'
 end
-
 
 group :development, :test do
 	gem 'ruby-debug'
