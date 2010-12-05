@@ -10,14 +10,16 @@ describe "videofiles/show.html.erb" do
   it "renders attributes in <p>" do
     rendered.should have_selector "div.content" do |content|
       content.should have_selector("h2") do |h2|
-        h2.inner_html.should == h(@videofile.title)
+        h2.inner_html.strip.should == h(@videofile.title.strip)
       end
       
       content.should have_selector("p") do |body|
-        body.inner_html.should == @videofile.body
+        body.inner_html.strip.should == @videofile.body.strip
       end
       
       content.should have_selector("img", :src => @videofile.poster.url)
+      
+      #content.should have_selector("a", :href => @videofile.processed.url)
     end
   end
 end

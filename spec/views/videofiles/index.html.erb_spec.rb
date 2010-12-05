@@ -2,13 +2,12 @@ require 'spec_helper'
 
 describe "videofiles/index.html.erb" do
   before(:each) do
-    assign(:videofiles, [
-      Factory.stub(:videofile),
-      Factory.stub(:videofile),
-      Factory.stub(:videofile),
-      Factory.stub(:videofile),
-      Factory.stub(:videofile)
-    ].paginate(:page => 1))
+    @videofiles = []
+    12.times do
+        @videofiles.push Factory.stub(:videofile)
+    end
+    
+    assign(:videofiles, @videofiles.paginate(:page => 1))
     render
   end
 
@@ -17,6 +16,10 @@ describe "videofiles/index.html.erb" do
       h1.inner_html.should == "Listing videofiles"
     end
     
-    pending "write test after design changes"
+    @videofiles.each do |videofile|
+      rendered.should have_selector("img", :src => videofile.poster.url(:mainpage))
+      rendered.should contain(videofile.title)
+      rendered.should_not contain(videofile.body)
+    end
   end
 end

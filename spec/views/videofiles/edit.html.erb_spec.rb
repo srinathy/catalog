@@ -6,11 +6,11 @@ describe "videofiles/edit.html.erb" do
     render    
   end
 
-  it "renders the edit videofile form" do
-    pending "Write tests for edit form"
-    # assert_select "form", :action => videofile_path(@videofile), :method => "post" do
-    #   assert_select "input#videofile_title", :name => "videofile[title]"
-    #   assert_select "textarea#videofile_body", :name => "videofile[body]"
-    # end
+  it "renders the edit videofile form" do    
+    rendered.should have_selector('input', :id => 'videofile_title', :name => 'videofile[title]')
+
+    rendered.should have_selector('textarea', :id => 'videofile_body', :name => 'videofile[body]')
+
+    rendered.should have_selector('input', :type=> 'file', :id => 'videofile_original', :name => 'videofile[original]')
   end
 end

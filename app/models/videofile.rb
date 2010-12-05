@@ -4,10 +4,6 @@ class Videofile < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 12
   @@order = 'created_at DESC'
-  
-  def body=(text)
-    write_attribute('body', Sanitize.clean(text, Sanitize::Config::RELAXED))
-  end
 
   has_attached_file :poster, :styles => { :mainpage => "200x200" }, :use_timestamp => false
   validates_attachment_presence :poster
@@ -21,4 +17,9 @@ class Videofile < ActiveRecord::Base
   
   has_attached_file :repacked
   validates_attachment_content_type :repacked, :content_type => ['video/x-flv']
+
+  def body=(text)
+    write_attribute('body', Sanitize.clean(text, Sanitize::Config::RELAXED))
+  end
+
 end

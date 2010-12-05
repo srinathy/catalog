@@ -5,7 +5,29 @@
 
 	<%= image_tag @videofile.poster.url %>
 	
-	<p><%= @videofile.body.html_safe %></p>
+	<p>
+		<%= @videofile.body.html_safe %>
+	</p>
+	
+	<p>
+	  <% if @videofile.repacked? %>
+	        <a 
+	                href="http://<%=APP_CONFIG[:domain]%><%= @videofile.repacked.url %>"   
+	                style="display:block;width:520px;height:330px"  
+	                id="player"></a> 
+
+	        <script>
+	                flowplayer("player", "/javascripts/vendor/flowplayer/flowplayer-3.2.4.swf", {
+	                        clip: 
+	                        { 
+	                                scaling: 'fit',
+	        autoPlay: false,
+	        autoBuffering: true
+	                        }
+	                });
+	        </script>
+	        <% end %>
+	</p>	
 </div>
 
 
