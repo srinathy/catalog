@@ -16,7 +16,7 @@ class Videofile < ActiveRecord::Base
   validates_attachment_content_type :original, :content_type => ['video/x-msvideo', 'video/mkv', 'video/mp4', 'video/H263','video/H263-1998','video/H263-2000','video/mpeg4','video/mpeg4-generic']
   
   has_attached_file :repacked, :use_timestamp => false
-  validates_attachment_content_type :repacked, :content_type => ['video/x-flv']
+  validates_attachment_content_type :repacked, :content_type => ['video/flv', 'video/x-flv', 'flv-application/octet-stream']
 
   def body=(text)
     write_attribute('body', Sanitize.clean(text, Sanitize::Config::RELAXED))
@@ -29,25 +29,23 @@ class Videofile < ActiveRecord::Base
   
   def process_video()
     if (!self.repacked.present?)
-      #logging should be here
+      #logging of broken file should be here
       return
     end
     
     movie = FFMPEG::Movie.new(self.original.path)
     
-    #tempfile = Paperclip::Tempfile.new(self.original.original_filename)
-    #tempfile.close
+    #simple Paperclip::Tempfile or tempfile doesn`t work, ffmpeg and paperclip both want original file extension    
+    Dir.mkdir(dir = File.join(Dir.tmpdir, rand(0x100000000000).to_s(36)))
     
-    dir = Dir.tmpdir
-    
-    tempfile = File.join(Dir.tmpdir, self.original.original_filename)
+    tempfile = File.join(dir, self.original.original_filename)
     
     movie.transcode(tempfile, { :video_codec => 'flv', :video_bitrate => 22500, :audio_channels => 1})
 
     self.repacked = File.new tempfile
     self.repacked.save
     
-    File.unlink tempfile
+    FileUtils.rm_rf dir
   end
 
 end
