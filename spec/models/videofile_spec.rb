@@ -38,16 +38,16 @@ describe Videofile do
   
   it "should be able to process file" do
     file = Factory.build :videofile
-    file.original = File.new(Rails.root.join('spec', 'files', 'test0.avi'))
-    
+    file.original.assign File.new(Rails.root.join('spec', 'files', 'test0.avi'))
+    file.save!
     file.process_video
-    
+        
     # doc - https://github.com/streamio/streamio-ffmpeg
     movie = FFMPEG::Movie.new(file.repacked.path)
     
     movie.should be_valid
     
-    movie.video_codec.should equal 'flv'
+    movie.video_codec.should == 'flv'
   end
   
 end
