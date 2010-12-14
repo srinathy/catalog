@@ -5,6 +5,8 @@ class Videofile < ActiveRecord::Base
   @@per_page = 12
   @@order = 'created_at DESC'
 
+  enum_attr :state, %w(^new processing active), :nil=>false
+
   has_attached_file :poster, :styles => { :mainpage => "200x200" }, :use_timestamp => false
   validates_attachment_presence :poster
   validates_attachment_size :poster, :less_than => 5.megabyte
@@ -28,8 +30,13 @@ class Videofile < ActiveRecord::Base
   end
   
   def self.convert_all
+    results = self.where(:state => 'new')
+    
+    return if (results.count==0)
+    
+    results.first.process_video
   end
-  
+    
   def process_video()
     if (!self.repacked.present?)
       #logging of broken file should be here

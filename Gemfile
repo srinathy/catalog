@@ -4,19 +4,13 @@ gem 'rails', '~>3.0'
 gem "will_paginate", "~> 3.0.pre2"
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
-	
 gem 'tiny_mce'
 gem 'sanitize'
-
 gem 'paperclip'
-
 gem 'capistrano'
-
 gem 'devise'
-
 gem 'streamio-ffmpeg'
-
-gem 'mongrel'
+gem 'enumerated_attribute'
 
 group :production do
 	gem 'mysql'
@@ -34,4 +28,6 @@ group :development, :test do
 	gem 'rspec-rails'
   gem 'shoulda'
 	gem 'webrat'
+	
+	gem 'mongrel'
 end

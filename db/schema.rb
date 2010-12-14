@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101209222538) do
+ActiveRecord::Schema.define(:version => 20101214224914) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                              :default => "", :null => false
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20101209222538) do
     t.string   "repacked_content_type"
     t.integer  "repacked_file_size"
     t.datetime "repacked_updated_at"
+    t.string   "state"
   end
 
 end

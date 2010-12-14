@@ -14,14 +14,31 @@ describe Videofile do
   end
   
   it "should do nothing in cron jobs when there is nothing to convert" do
-    pending "add cron job tests"
-    file = mock "Videofile"
-    file.should_receive(:find).once.and_return({})
-    file.stub! :convert_all
+    Videofile.should_receive(:where).once.with({:state => 'new'}).and_return([])
+    Videofile.convert_all
   end
   
   it "should convert video if present" do
+    file = mock 'Videofile'
+    file.should_receive(:process_video).once
     
+    Videofile.should_receive(:where).once.with({:state => 'new'}).and_return([file])
+    Videofile.convert_all
+  end
+
+  it "should work with states" do
+    @file.state.should == :new
+    @file.new?.should be true
+    
+    @file.state_next
+    
+    @file.state.should == :processing
+    @file.processing?.should be true
+    
+    @file.state_next
+    
+    @file.state.should == :active
+    @file.active?.should be true    
   end
   
   it { should have_attached_file(:poster) }
