@@ -12,7 +12,11 @@ gem 'paperclip'
 
 gem 'capistrano'
 
+gem 'devise'
+
 gem 'streamio-ffmpeg'
+
+gem 'mongrel'
 
 group :production do
 	gem 'mysql'

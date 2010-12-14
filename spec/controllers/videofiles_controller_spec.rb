@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe VideofilesController do
+  
+  before (:each) do
+    @admin = Factory.create(:admin)
+    sign_in @admin
+  end
 
   def mock_videofile(stubs={})
     (@mock_videofile ||= mock_model(Videofile).as_null_object).tap do |videofile|
@@ -33,6 +38,13 @@ describe VideofilesController do
   end
 
   describe "GET edit" do
+    it "doesnt work for non-admin" do
+      sign_out :admin
+      Videofile.stub(:find).with("37") { mock_videofile }
+      get :edit, :id => "37"
+      assigns(:videofile).should_not be(mock_videofile)
+    end
+    
     it "assigns the requested videofile as @videofile" do
       Videofile.stub(:find).with("37") { mock_videofile }
       get :edit, :id => "37"
@@ -75,6 +87,13 @@ describe VideofilesController do
   describe "PUT update" do
 
     describe "with valid params" do
+      it "doesnt work for non-authorised user" do
+        sign_out :admin
+        Videofile.should_not_receive(:find).with("37") { mock_videofile }
+        mock_videofile.should_not_receive(:update_attributes).with({'these' => 'params'})
+        put :update, :id => "37", :videofile => {'these' => 'params'}
+      end
+      
       it "updates the requested videofile" do
         Videofile.should_receive(:find).with("37") { mock_videofile }
         mock_videofile.should_receive(:update_attributes).with({'these' => 'params'})
@@ -111,6 +130,13 @@ describe VideofilesController do
   end
 
   describe "DELETE destroy" do
+    it "doesn`t work as not admin user" do
+      sign_out :admin
+      Videofile.should_not_receive(:find).with("37") { mock_videofile }
+      mock_videofile.should_not_receive(:destroy)
+      delete :destroy, :id => "37"
+    end
+    
     it "destroys the requested videofile" do
       Videofile.should_receive(:find).with("37") { mock_videofile }
       mock_videofile.should_receive(:destroy)

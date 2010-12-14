@@ -27,6 +27,9 @@ class Videofile < ActiveRecord::Base
     write_attribute('repacked', file)
   end
   
+  def self.convert_all
+  end
+  
   def process_video()
     if (!self.repacked.present?)
       #logging of broken file should be here

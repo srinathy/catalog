@@ -3,6 +3,12 @@
 
 Factory.find_definitions
 
-10.times{
-  Factory.create :videofile
+20.times{
+  Factory.build(:videofile).save(false)
 }
+
+puts "Added 20 files"
+
+Factory.create(:admin)
+
+puts "Added admin with email "+Admin.find(:first).email

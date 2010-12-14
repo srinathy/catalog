@@ -30,4 +30,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   
   config.include Paperclip::Shoulda::Matchers
+  
+  config.include Devise::TestHelpers, :type => :controller
+  config.include Devise::TestHelpers, :type => :view
 end

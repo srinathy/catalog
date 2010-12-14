@@ -13,15 +13,20 @@
 			<%= videofile.title %> (<%= videofile.rating %> of <%= videofile.votes %>)
 		<% end %>
 	</p>
+	<% if admin_signed_in? %>
 	<p>
     <%= link_to 'Edit', edit_videofile_path(videofile) %> &nbsp;
     <%= link_to 'Destroy', videofile, :confirm => 'Are you sure?', :method => :delete %>
 	</p>
+	<% end %>
 </td>
+
 <%=(cycle("","","</tr><tr>").html_safe) %>
 <% end %>
 </tr></table>
 <%= will_paginate @videofiles %>
 <br />
 
-<%= link_to 'New Videofile', new_videofile_path %>
+<% if admin_signed_in? %>
+	<%= link_to 'New Videofile', new_videofile_path %>
+<% end %>

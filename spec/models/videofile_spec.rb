@@ -13,6 +13,17 @@ describe Videofile do
     @file.body.should_not == test
   end
   
+  it "should do nothing in cron jobs when there is nothing to convert" do
+    pending "add cron job tests"
+    file = mock "Videofile"
+    file.should_receive(:find).once.and_return({})
+    file.stub! :convert_all
+  end
+  
+  it "should convert video if present" do
+    
+  end
+  
   it { should have_attached_file(:poster) }
   it { should validate_attachment_presence(:poster) }
     

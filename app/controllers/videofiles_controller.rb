@@ -1,5 +1,6 @@
 class VideofilesController < ApplicationController
   uses_tiny_mce
+  before_filter :authenticate_admin!, :except => [:index, :show]
     
   # GET /videofiles
   # GET /videofiles.xml
