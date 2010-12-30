@@ -22,9 +22,9 @@
 	                flowplayer("player", "/javascripts/vendor/flowplayer/flowplayer-3.2.4.swf", {
 	                        clip: 
 	                        { 
-	                                scaling: 'fit',
-	        autoPlay: false,
-	        autoBuffering: true
+                            scaling: 'fit',
+                            autoPlay: false,
+                            autoBuffering: true
 	                        }
 	                });
 	        </script>
@@ -36,6 +36,8 @@
 	</p>	
 </div>
 
-
-<%= link_to 'Edit', edit_videofile_path(@videofile) %> |
+<% if admin_signed_in? %>
+  <%= link_to 'Edit', edit_videofile_path(@videofile) %> |
+<% end %>
+<%= link_to 'Download', @videofile.original.url %> |
 <%= link_to 'Back', videofiles_path %>
