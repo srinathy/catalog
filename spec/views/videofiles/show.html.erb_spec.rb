@@ -17,7 +17,7 @@ describe "videofiles/show.html.erb" do
         body.inner_html.strip.should == @videofile.body.strip
       end
       
-      content.should have_selector("img", :src => @videofile.poster.url)
+      content.should have_selector("img", :src => @videofile.poster.url(:small))
     end
   end
   
