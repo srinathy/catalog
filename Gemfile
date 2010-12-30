@@ -11,6 +11,7 @@ gem 'capistrano'
 gem 'devise'
 gem 'streamio-ffmpeg'
 gem 'enumerated_attribute'
+gem 'whenever'
 
 group :production do
 	gem 'mysql'

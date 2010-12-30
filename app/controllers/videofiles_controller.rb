@@ -43,7 +43,7 @@ class VideofilesController < ApplicationController
   # POST /videofiles.xml
   def create
     @videofile = Videofile.new(params[:videofile])
-
+    
     respond_to do |format|
       if @videofile.save
         format.html { redirect_to(@videofile, :notice => 'Videofile was successfully created.') }

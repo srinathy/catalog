@@ -1,12 +1,13 @@
-load 'config/private';
-
 set :application, "catalog"
+set :gh_username "brain-geek"
+
+load 'config/private'
 
 #############################################################
 #	Git settings
 #############################################################
 
-set :repository,  "git://github.com/brain-geek/#{application}.git"
+set :repository,  "git://github.com/#{gh_username}/#{application}.git"
 set :scm, :git
 set :deploy_via, :remote_cache
 
@@ -34,6 +35,9 @@ role :db,  domain, :primary => true
 
 #update bundle
 require 'bundler/capistrano'
+
+#set sheduler jobs
+require 'lib/whenever/capistrano.rb'
 
 #config files
 after "deploy:symlink", :roles => :web do

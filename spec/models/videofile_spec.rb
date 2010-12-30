@@ -65,9 +65,13 @@ describe Videofile do
     file = Factory.build :videofile
     file.original.assign File.new(Rails.root.join('spec', 'files', 'test0.avi'))
     file.save!
+    #this function should convert video and change state
     file.process_video
-        
-    # doc - https://github.com/streamio/streamio-ffmpeg
+    
+    #checking state
+    file.active?.should be true        
+    
+    #checking videofile, doc - https://github.com/streamio/streamio-ffmpeg
     movie = FFMPEG::Movie.new(file.repacked.path)
     movie.should be_valid
     movie.video_codec.should == 'flv'
