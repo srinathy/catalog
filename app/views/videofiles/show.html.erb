@@ -5,7 +5,7 @@
 <div class="content">
 	<h2><%= @videofile.title %></h2>
 
-	<%= image_tag @videofile.poster.url %>
+	<%= image_tag @videofile.poster.url(:small) %>
 	
 	<p>
 		<%= @videofile.body.html_safe %>
