@@ -1,5 +1,5 @@
 set :application, "catalog"
-set :gh_username "brain-geek"
+set :gh_username, "brain-geek"
 
 load 'config/private'
 
@@ -37,7 +37,9 @@ role :db,  domain, :primary => true
 require 'bundler/capistrano'
 
 #set sheduler jobs
-require 'lib/whenever/capistrano.rb'
+after "deploy:symlink", :roles => :web do
+  run "cd #{release_path} && whenever --update-crontab #{application}"
+end
 
 #config files
 after "deploy:symlink", :roles => :web do
