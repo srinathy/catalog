@@ -10,3 +10,6 @@ en:
     edit_link: "Edit"
     are_you_sure: "Are you sure?"
     destroy_link: "Delete"
+    to_list_link: "Back"
+    download_link: "Download"
+    

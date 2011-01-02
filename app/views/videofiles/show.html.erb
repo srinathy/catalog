@@ -37,7 +37,7 @@
 </div>
 
 <% if admin_signed_in? %>
-  <%= link_to 'Edit', edit_videofile_path(@videofile) %> |
+  <%= link_to t('edit_link'), edit_videofile_path(@videofile) %> |
 <% end %>
-<%= link_to 'Download', @videofile.original.url %> |
-<%= link_to 'Back', videofiles_path %>
+<%= link_to t('download_link'), @videofile.original.url %> |
+<%= link_to t('to_list_link'), videofiles_path %>
