@@ -30,6 +30,8 @@ GEM
       activemodel (= 3.0.3)
       activesupport (= 3.0.3)
     activesupport (3.0.3)
+    ancestry (1.2.3)
+      activerecord (>= 2.2.2)
     arel (2.0.6)
     autotest (4.4.6)
       ZenTest (>= 4.4.1)
@@ -43,6 +45,7 @@ GEM
       net-ssh-gateway (>= 1.0.0)
     cgi_multipart_eof_fix (2.5.0)
     columnize (0.3.2)
+    crummy (1.1.0)
     daemons (1.1.0)
     devise (1.1.5)
       bcrypt-ruby (~> 2.1.2)
@@ -88,7 +91,7 @@ GEM
     rack (1.2.1)
     rack-mount (0.6.13)
       rack (>= 1.0.0)
-    rack-test (0.5.6)
+    rack-test (0.5.7)
       rack (>= 1.0)
     rails (3.0.3)
       actionmailer (= 3.0.3)
@@ -134,7 +137,7 @@ GEM
     tzinfo (0.3.23)
     warden (1.0.3)
       rack (>= 1.0.0)
-    webrat (0.7.2)
+    webrat (0.7.3)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
@@ -147,8 +150,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ancestry
   autotest
   capistrano
+  crummy
   devise
   enumerated_attribute
   factory_girl

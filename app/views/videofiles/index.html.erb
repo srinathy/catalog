@@ -1,42 +1,52 @@
-<h1>Listing videofiles</h1>
+<!-- <h1><%=t "list_videofiles" %></h1> -->
 
-<table width="100%">
-  <tr>
-    <% Category.find(:all).each do |category|%>
-    <td>
-      <%=link_to category.title, :controller => 'videofiles', :category => category.id%>
-    </td>
-    <% end %>
-  </tr>
-</table>
-
-<table width="100%"><tr>
-<% @videofiles.each do |videofile| %>
-<td class="content-block" id="item-<%=videofile.id%>">
-	<p>
-		<%= link_to videofile do %>
-			<%= image_tag(videofile.poster.url(:mainpage)) if videofile.poster? %>
-		<% end %>
-	</p>
-	<p>
-		<%= link_to videofile, :class => "content-link" do %>	
-			<%= videofile.title %> (<%= videofile.rating %> of <%= videofile.votes %>)
-		<% end %>
-	</p>
-	<% if admin_signed_in? %>
-	<p>
-    <%= link_to 'Edit', edit_videofile_path(videofile) %> &nbsp;
-    <%= link_to 'Destroy', videofile, :confirm => 'Are you sure?', :method => :delete %>
-	</p>
-	<% end %>
-</td>
-
-<%=(cycle("","","</tr><tr>").html_safe) %>
+<% unless @categories.empty? %>
+  <table width="100%">
+    <tr>
+      <td>
+        <%=t "list_categories" %>
+      </td>
+      <% @categories.each do |category|%>
+      <td>
+        <%=link_to category.title, :controller => 'videofiles', :category => category.id %>
+      </td>
+      <% end %>
+    </tr>
+  </table>
 <% end %>
-</tr></table>
-<%= will_paginate @videofiles %>
+
+<% unless @videofiles.empty? %>
+  <table width="100%"><tr>
+  <% @videofiles.each do |videofile| %>
+    <td class="content-block" id="item-<%=videofile.id%>">
+    	<p>
+    		<%= link_to videofile do %>
+    			<%= image_tag(videofile.poster.url(:mainpage)) if videofile.poster? %>
+    		<% end %>
+    	</p>
+    	<p>
+    		<%= link_to videofile, :class => "content-link" do %>	
+    			<%= videofile.title %>
+    		<% end %>
+    	</p>
+    	<% if admin_signed_in? %>
+    	<p>
+        <%= link_to t('edit_link'), edit_videofile_path(videofile) %> &nbsp;
+        <%= link_to t('destroy_link'), videofile, :confirm => t('are_you_sure'), :method => :delete %>
+    	</p>
+    	<% end %>
+    </td>
+
+    <%=(cycle("","","</tr><tr>").html_safe) %>
+  <% end %>
+  </tr></table>
+  <%= will_paginate @videofiles %>
+<% else %>
+  <h3><%=t "no_files_availible" %></h3>
+<% end %>
+
 <br />
 
 <% if admin_signed_in? %>
-	<%= link_to 'New Videofile', new_videofile_path %>
+	<%= link_to t ('new_videofile'), new_videofile_path %>
 <% end %>

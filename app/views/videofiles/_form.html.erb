@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :category %><br />
-    <%= f.select(:category_id, Category.all.collect {|p| [ p.title, p.id ] }, {:include_blank => 'None'}) %>    
+    <%= f.select(:category_id, Category.input_list) %>    
   </div>
   <div class="field">
     <%= f.label :body %><br />

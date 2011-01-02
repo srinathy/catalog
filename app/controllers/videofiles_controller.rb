@@ -6,6 +6,10 @@ class VideofilesController < ApplicationController
   # GET /videofiles.xml
   def index
     @videofiles = Videofile.search params[:page], params[:category]
+    @categories = Category.get_subcats params[:category]
+    
+    add_category_crumbs(params[:category])
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @videofiles }
@@ -16,6 +20,8 @@ class VideofilesController < ApplicationController
   # GET /videofiles/1.xml
   def show
     @videofile = Videofile.find(params[:id])
+
+    add_category_crumbs(@videofile.category)
 
     respond_to do |format|
       format.html # show.html.erb

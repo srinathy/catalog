@@ -1,5 +1,8 @@
 development:
   domain: localhost:3000
+  site_title: DEVELOPMENT Video catalog
+  video_bitrate: 11025
+  audio_bitrate: 4
 
 test:
   domain: test.host

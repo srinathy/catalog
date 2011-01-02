@@ -1,17 +1,24 @@
 source 'http://rubygems.org'
-
 gem 'rails', '~>3.0'
-gem "will_paginate", "~> 3.0.pre2"
 
-gem 'sqlite3-ruby', :require => 'sqlite3'
+#view gems
+gem "will_paginate", "~> 3.0.pre2"
+gem 'crummy'
 gem 'tiny_mce'
-gem 'sanitize'
+
+#db gems
+gem 'ancestry'
+gem 'enumerated_attribute'
 gem 'paperclip'
+gem 'sanitize'
+
+#backend gems
 gem 'capistrano'
 gem 'devise'
-gem 'streamio-ffmpeg'
-gem 'enumerated_attribute'
 gem 'whenever'
+gem 'streamio-ffmpeg'
+
+gem 'sqlite3-ruby', :require => 'sqlite3'
 
 group :production do
 	gem 'mysql'

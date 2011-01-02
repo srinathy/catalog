@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110102105158) do
+ActiveRecord::Schema.define(:version => 20110102181511) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                              :default => "", :null => false
@@ -33,7 +33,10 @@ ActiveRecord::Schema.define(:version => 20110102105158) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "ancestry"
   end
+
+  add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
 
   create_table "videofiles", :force => true do |t|
     t.string   "title"

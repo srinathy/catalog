@@ -6,3 +6,4 @@ db/schema.rb
 public/system/*
 config/private.rb
 .DS_Store
+*.log

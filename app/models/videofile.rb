@@ -44,7 +44,8 @@ class Videofile < ActiveRecord::Base
   
   def self.search (page, category)
     if (category)
-        paginate :per_page => @@per_page, :page => page, :order => @@order, :conditions => {:category_id => category}
+        paginate  :per_page => @@per_page, :page => page, :order => @@order, 
+                  :conditions => [ 'category_id in (?)', Category.find(category).children.map {|i| i.id} ]
     else
         paginate :per_page => @@per_page, :page => page, :order => @@order
     end
@@ -66,8 +67,8 @@ class Videofile < ActiveRecord::Base
     tempfile = File.join(dir, self.original.original_filename+'.flv')
     
     movie.transcode(tempfile, { 
-        :video_codec => 'flv', :video_bitrate => 44100,
-        :audio_bitrate => 32, :audio_sample_rate => 22050, :audio_channels => 1,
+        :video_codec => 'flv', :video_bitrate => APP_CONFIG[:video_bitrate] || 44100,
+        :audio_bitrate => APP_CONFIG[:audio_bitrate] || 32, :audio_sample_rate => 22050, :audio_channels => 1,
       })
 
     self.repacked = File.new tempfile
