@@ -4,6 +4,6 @@
 
 job_type :runner,  "cd :path && script/rails runner -e :environment ':task'"
 
-every 5.minutes do
+every 3.minutes do
    runner "Videofile.convert_all"
 end
