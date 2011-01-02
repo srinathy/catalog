@@ -2,6 +2,6 @@
 
 #set :output, "catalog_cron.log"
 
-every 30.minutes do
+every 5.minutes do
    runner "Videofile.convert_all"
 end
