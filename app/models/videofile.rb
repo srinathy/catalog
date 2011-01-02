@@ -1,11 +1,15 @@
 class Videofile < ActiveRecord::Base
-  attr_accessible :title, :body, :rating, :original, :poster
+  attr_accessible :title, :body, :rating, :original, :poster, :category_id
   
+  #paging
   cattr_reader :per_page
   @@per_page = 12
   @@order = 'created_at DESC'
 
+  #states
   enum_attr :state, %w(^new processing active), :nil=>false
+  
+  belongs_to :category
 
   has_attached_file :poster, :styles => { :mainpage => "200x200", :small => "300x500" }, :use_timestamp => false
   validates_attachment_presence :poster
@@ -24,10 +28,11 @@ class Videofile < ActiveRecord::Base
     write_attribute('body', Sanitize.clean(text, Sanitize::Config::RELAXED))
   end
   
-#  def original=(file)
-#    self.repacked.destroy
-#    write_attribute('repacked', file)
-#  end
+ # def original=(file)
+ #   self.repacked.destroy
+ #   write_attribute('original', file)
+ #   self.state = :new
+ # end
   
   def self.convert_all
     results = self.where(:state => 'new')
@@ -35,6 +40,14 @@ class Videofile < ActiveRecord::Base
     return if (results.count==0)
     
     results.first.process_video
+  end
+  
+  def self.search (page, category)
+    if (category)
+        paginate :per_page => @@per_page, :page => page, :order => @@order, :conditions => {:category_id => category}
+    else
+        paginate :per_page => @@per_page, :page => page, :order => @@order
+    end
   end
     
   def process_video()
@@ -52,7 +65,10 @@ class Videofile < ActiveRecord::Base
     
     tempfile = File.join(dir, self.original.original_filename+'.flv')
     
-    movie.transcode(tempfile, { :video_codec => 'flv', :video_bitrate => 22500, :audio_channels => 1})
+    movie.transcode(tempfile, { 
+        :video_codec => 'flv', :video_bitrate => 44100,
+        :audio_bitrate => 32, :audio_sample_rate => 22050, :audio_channels => 1,
+      })
 
     self.repacked = File.new tempfile
     self.repacked.save

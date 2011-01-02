@@ -5,7 +5,7 @@ class VideofilesController < ApplicationController
   # GET /videofiles
   # GET /videofiles.xml
   def index
-    @videofiles = Videofile.paginate:page => params[:page]
+    @videofiles = Videofile.search params[:page], params[:category]
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @videofiles }
