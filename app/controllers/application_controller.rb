@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   private
   def init_page
     I18n.locale = params[:locale] || APP_CONFIG[:locale]
-    add_crumb I18n.t("index_page"), '/'
+    add_crumb I18n.t("index_page"), url_for(:controller => 'videofiles', :action => 'index')
   end
   
   def default_url_options(options={})

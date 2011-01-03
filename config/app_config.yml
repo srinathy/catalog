@@ -3,7 +3,7 @@ development:
   site_title: DEVELOPMENT Video catalog
   video_bitrate: 11025
   audio_bitrate: 4
-  locale: ru
+  locale: en
 
 test:
   domain: test.host
