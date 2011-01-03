@@ -2,14 +2,14 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-    index_page: "Main page"
-    list_categories: "List of categories:"
-    no_files_availible: "No files present"
-    file_not_processed: "File will be availible for online playing later"
-    new_videofile: "Upload new movie"
-    edit_link: "Edit"
-    are_you_sure: "Are you sure?"
-    destroy_link: "Delete"
-    to_list_link: "Back"
-    download_link: "Download"
+  index_page: "Main page"
+  list_categories: "List of categories:"
+  no_files_availible: "No files present"
+  file_not_processed: "File will be availible for online playing later"
+  new_videofile: "Upload new movie"
+  edit_link: "Edit"
+  are_you_sure: "Are you sure?"
+  destroy_link: "Delete"
+  to_list_link: "Back"
+  download_link: "Download"
     
