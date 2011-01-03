@@ -5,6 +5,11 @@ class ApplicationController < ActionController::Base
   private
   def init_page
     add_crumb I18n.t("index_page"), '/'
+    I18n.locale = params[:locale]    
+  end
+  
+  def default_url_options(options={})
+    { :locale => I18n.locale }
   end
   
   def add_category_crumbs(obj)
