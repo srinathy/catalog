@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
     I18n.locale = params[:locale] || APP_CONFIG[:locale]
   end
   
+  def default_url_options(options={})
+    { :locale => I18n.locale } if params[:locale]
+  end
+  
   def add_category_crumbs(obj)
     unless (obj.is_a? Category)
       obj = Category.find_by_id(obj)
