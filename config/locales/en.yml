@@ -2,7 +2,7 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-    main_page: "Main page"
+    index_page: "Main page"
     list_categories: "List of categories:"
     no_files_availible: "No files present"
     file_not_processed: "File will be availible for online playing later"

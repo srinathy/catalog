@@ -9,3 +9,4 @@ test:
 
 production:
   domain: example.com
+  site_title: Video catalog

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  add_crumb I18n.t("main_page"), '/'
+  add_crumb I18n.t("index_page"), '/'
 
   private
   def add_category_crumbs(obj)
