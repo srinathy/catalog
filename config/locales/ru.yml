@@ -1,0 +1,11 @@
+en:
+  index_page: "Главная страница"
+  list_categories: "Категории:"
+  no_files_availible: "Нечего показывать"
+  file_not_processed: "Фильм будет доступен для онлайн-просмотра позже"
+  new_videofile: "Добавить новый фильм"
+  edit_link: "Изменить"
+  are_you_sure: "Вы уверены?"
+  destroy_link: "Удалить"
+  to_list_link: "Назад"
+  download_link: "Скачать"
