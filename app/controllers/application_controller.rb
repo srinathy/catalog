@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
   end
   
   def default_url_options(options={})
-    { :locale => I18n.locale } if params[:locale]
+    return { :locale => I18n.locale } if params[:locale]
+    {}
   end
   
   def add_category_crumbs(obj)
