@@ -44,10 +44,13 @@ class Videofile < ActiveRecord::Base
   
   def self.search (page, category)
     if (category)
+        category = category.id if category.is_a? Category
+        
         paginate  :per_page => @@per_page, :page => page, :order => @@order, 
-                  :conditions => [ 'category_id in (?)', Category.find(category).children.map {|i| i.id} ]
+                  :conditions => { 'category_id' => category}
     else
-        paginate :per_page => @@per_page, :page => page, :order => @@order
+        paginate  :per_page => @@per_page, :page => page, :order => @@order, 
+                  :conditions => {'category_id' => nil}
     end
   end
     
