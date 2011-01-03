@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   private
   def init_page
     add_crumb I18n.t("index_page"), '/'
-    I18n.locale = params[:locale]    
+    I18n.locale = params[:locale] || APP_CONFIG[:locale]
   end
   
   def default_url_options(options={})
